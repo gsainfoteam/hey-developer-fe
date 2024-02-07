@@ -50,7 +50,8 @@ function useForm() {
           email: email,
         }),
       });
-      if (!response.ok) throw new Error();
+      console.log(response.ok);
+      if (!response.ok) throw new Error("api error");
       setFormState("submitted");
       navigate("/submitted");
     } catch {
