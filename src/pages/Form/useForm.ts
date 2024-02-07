@@ -38,7 +38,7 @@ function useForm() {
   const onSubmit = async () => {
     setFormState("submitting");
     try {
-      await fetch("https://api.cs.gistory.me/", {
+      const response = await fetch("https://api.cs.gistory.me/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,6 +50,7 @@ function useForm() {
           email: email,
         }),
       });
+      if (!response.ok) throw new Error();
       setFormState("submitted");
       navigate("/submitted");
     } catch {
