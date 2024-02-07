@@ -6,9 +6,11 @@ import infoteamTextLogo from "../assets/infoteam_text_logo.png";
 
 const Container = styled.div`
   width: 100%;
-  height: 50px;
+  height: 30px;
   padding: 10px;
-  border: 1px solid red;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(2px);
+  border-bottom: 1px solid lightgray;
 `;
 
 const InfoteamLink = styled(Link)`
@@ -39,12 +41,12 @@ const InfoteamTextLogo = styled.img.attrs({ src: infoteamTextLogo })`
 
 const InfoteamTextLabelContainer = styled.div`
   display: flex;
-  gap: 0.5em;
+  gap: 0.2em;
 `;
 
 const InfoteamTextSubLabelLight = styled.div`
   display: flex;
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: 500;
   color: #eb6263;
 `;
@@ -56,7 +58,7 @@ const InfoteamTextSubLabelBold = styled(InfoteamTextSubLabelLight)`
 const Header = () => {
   return (
     <Container>
-      <InfoteamLink to="/">
+      <InfoteamLink to="https://introduce.gistory.me/">
         <LogoWrapper>
           <InfoteamLogo />
           <InfoteamTextLogo />

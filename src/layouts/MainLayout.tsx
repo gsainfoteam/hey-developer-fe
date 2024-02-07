@@ -5,26 +5,37 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  justify-content: space-between;
+  height: 100vh;
+  overflow: auto;
+`;
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  position: sticky;
+  top: 0;
 `;
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
 `;
 
 const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  max-width: 1340px;
-  padding: 0 200px;
+  max-width: 800px;
 `;
 
 const MainLayout = () => {
   return (
     <Container>
-      <Wrapper>
+      <HeaderWrapper>
         <Header />
-      </Wrapper>
+      </HeaderWrapper>
       <Wrapper>
         <Main>
           <Outlet />
