@@ -58,7 +58,7 @@ const InfoteamTextSubLabelBold = styled(InfoteamTextSubLabelLight)`
 const Header = () => {
   return (
     <Container>
-      <InfoteamLink to="https://introduce.gistory.me/">
+      <InfoteamLink to="/">
         <LogoWrapper>
           <InfoteamLogo />
           <InfoteamTextLogo />
