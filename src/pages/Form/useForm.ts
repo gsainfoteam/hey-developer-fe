@@ -44,7 +44,7 @@ function useForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          service: searchParams.get("service"),
+          service: searchParams.get("service") ?? undefined,
           feedback: feedback,
           photos: imagePreviews,
           email: email,
