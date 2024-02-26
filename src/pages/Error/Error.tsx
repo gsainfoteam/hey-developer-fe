@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Text } from "src/components/Text";
 import styled from "styled-components";
 
@@ -48,6 +48,8 @@ const Button = styled.button`
 
 const Error = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const service = searchParams.get("service") ?? undefined;
 
   return (
     <Wrapper>
@@ -60,7 +62,9 @@ const Error = () => {
           다른 연락처로 알려주시면 빠르게 고쳐보겠습니다;;
         </Text>
       </Container>
-      <Button onClick={() => navigate("/")}>돌아가기</Button>
+      <Button onClick={() => navigate(service ? `/?service=${service}` : "/")}>
+        돌아가기
+      </Button>
     </Wrapper>
   );
 };

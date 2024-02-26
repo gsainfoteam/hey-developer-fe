@@ -37,6 +37,7 @@ function useForm() {
 
   const onSubmit = async () => {
     setFormState("submitting");
+    const service = searchParams.get("service") ?? undefined;
     try {
       const response = await fetch("https://api.cs.gistory.me/", {
         method: "POST",
@@ -44,7 +45,7 @@ function useForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          service: searchParams.get("service") ?? undefined,
+          service: service,
           feedback: feedback,
           photos: imagePreviews,
           email: email,
@@ -53,10 +54,10 @@ function useForm() {
       console.log(response.ok);
       if (!response.ok) throw new Error("api error");
       setFormState("submitted");
-      navigate("/submitted");
+      navigate(service ? `/submitted/?service=${service}` : "/submitted");
     } catch {
       setFormState("error");
-      navigate("/error");
+      navigate(service ? `/error/?service=${service}` : "/error");
     }
   };
 

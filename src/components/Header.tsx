@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 import infoteamLogo from "../assets/infoteam_logo.png";
@@ -56,9 +56,12 @@ const InfoteamTextSubLabelBold = styled(InfoteamTextSubLabelLight)`
 `;
 
 const Header = () => {
+  const [searchParams] = useSearchParams();
+  const service = searchParams.get("service") ?? undefined;
+
   return (
     <Container>
-      <InfoteamLink to="/">
+      <InfoteamLink to={service ? `/?service=${service}` : "/"}>
         <LogoWrapper>
           <InfoteamLogo />
           <InfoteamTextLogo />
