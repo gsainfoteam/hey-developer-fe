@@ -39,7 +39,7 @@ function useForm() {
     setFormState("submitting");
     const service = searchParams.get("service") ?? undefined;
     try {
-      const response = await fetch("https://api.cs.gistory.me/", {
+      const response = await fetch("https://api.cs.gistory.me/feedback/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
