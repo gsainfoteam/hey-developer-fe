@@ -19,11 +19,6 @@ function useForm() {
   } = useImageInput({
     max: maxFileNum,
   });
-  const {
-    text: email,
-    onChange: onEmailChange,
-    setText: setEmail,
-  } = useEmailInput();
 
   const [formState, setFormState] = useState<
     "empty" | "editing" | "submitting" | "submitted" | "error"
@@ -39,9 +34,9 @@ function useForm() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setEmail(searchParams.get("email") ?? "");
-  }, [searchParams, setEmail]);
+  const { text: email, onChange: onEmailChange } = useEmailInput(
+    searchParams.get("email"),
+  );
 
   const onSubmit = async () => {
     setFormState("submitting");
