@@ -7,7 +7,7 @@ function useEmailInput() {
     setText(e.target.value);
   };
 
-  return { text, onChange };
+  return { text, onChange, setText };
 }
 
 export default useEmailInput;
