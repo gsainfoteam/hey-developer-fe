@@ -47,7 +47,7 @@ const FeedbackInput = ({
   return (
     <Container>
       <Text>
-        불편사항을 접수하시면 정보국에서 해당 사항을 검토하고 조치를
+        불편사항을 접수하시면 인포팀에서 해당 사항을 검토하고 조치를
         취하겠습니다.
       </Text>
       <Input
