@@ -33,18 +33,6 @@ const InfoteamLogo = styled.img.attrs({ src: infoteamLogo })`
   height: 100%;
 `;
 
-const InfoteamTextLabelContainer = styled.div`
-  display: flex;
-  gap: 0.2em;
-`;
-
-const InfoteamTextSubLabelLight = styled.div`
-  display: flex;
-  font-size: 1em;
-  font-weight: 500;
-  color: #111111;
-`;
-
 const Header = () => {
   const [searchParams] = useSearchParams();
   const service = searchParams.get("service") ?? undefined;
@@ -55,9 +43,6 @@ const Header = () => {
         <LogoWrapper>
           <InfoteamLogo />
         </LogoWrapper>
-        <InfoteamTextLabelContainer>
-          <InfoteamTextSubLabelLight>Feedback</InfoteamTextSubLabelLight>
-        </InfoteamTextLabelContainer>
       </InfoteamLink>
     </Container>
   );
