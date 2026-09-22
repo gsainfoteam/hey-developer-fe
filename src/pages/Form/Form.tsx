@@ -1,8 +1,8 @@
-import Callout from "src/components/Callout";
 import EmailInput from "src/components/EmailInput";
 import FeedbackInput from "src/components/FeedbackInput";
+import FeedbackTypeSelect from "src/components/FeedbackTypeSelect";
 import ImageInput from "src/components/ImageInput";
-import { MultipleText, Text } from "src/components/Text";
+import { Text } from "src/components/Text";
 import styled from "styled-components";
 
 import useForm from "./useForm";
@@ -16,13 +16,6 @@ const Wrapper = styled.div`
   width: 100%;
   padding: 60px 0;
   gap: 50px;
-`;
-
-const CalloutSection = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  gap: 10px;
 `;
 
 const TitleSection = styled.div`
@@ -75,6 +68,8 @@ const Submitting = styled.div`
 
 const Form = () => {
   const {
+    feedbackType,
+    onFeedbackTypeChange,
     feedback,
     maxFeedbackLength,
     onFeedbackChange,
@@ -86,6 +81,8 @@ const Form = () => {
     imagePreviews,
     email,
     onEmailChange,
+    isEmailRequired,
+    isEmailInvalid,
     onSubmit,
     formState,
   } = useForm();
@@ -98,30 +95,15 @@ const Form = () => {
             피드백을 남겨주세요
           </Text>
         </TitleSection>
-        <CalloutSection>
-          <Callout icon="🪲">
-            <MultipleText>
-              <Text fontWeight={400}>서비스를 이용하시다가 </Text>
-              <Text fontWeight={700}>예상치 못한 버그</Text>
-              <Text fontWeight={400}>
-                가 발생하셔서 이용에 불편을 겪으셨나요?
-              </Text>
-            </MultipleText>
-          </Callout>
-          <Callout icon="📢">
-            <MultipleText>
-              <Text fontWeight={400}>서비스의 특정 부분에 </Text>
-              <Text fontWeight={700}>개선이 필요</Text>
-              <Text fontWeight={400}>
-                해 보이는데, 이를 개발자에게 알리고 싶나요?
-              </Text>
-            </MultipleText>
-          </Callout>
-        </CalloutSection>
+        <FeedbackTypeSelect
+          feedbackType={feedbackType}
+          onFeedbackTypeChange={onFeedbackTypeChange}
+        />
         <FeedbackInput
           feedback={feedback}
           onFeedbackChange={onFeedbackChange}
           maxFeedbackLength={maxFeedbackLength}
+          feedbackType={feedbackType}
         />
         <ImageInput
           maxFileNum={maxFileNum}
@@ -131,7 +113,12 @@ const Form = () => {
           handleRemoveImage={handleRemoveImage}
           imagePreviews={imagePreviews}
         />
-        <EmailInput email={email} onEmailChange={onEmailChange} />
+        <EmailInput
+          email={email}
+          onEmailChange={onEmailChange}
+          required={isEmailRequired}
+          invalid={isEmailInvalid}
+        />
         {formState === "submitting" && <Submitting>제출하는 중...</Submitting>}
         {(formState === "editing" || formState === "empty") && (
           <SubmitButton onClick={onSubmit} disabled={formState === "empty"}>
