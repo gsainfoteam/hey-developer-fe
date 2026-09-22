@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useEmailInput from "src/components/useEmailInput";
 import useFeedbackInput from "src/components/useFeedbackInput";
+import useFeedbackTypeSelect from "src/components/useFeedbackTypeSelect";
 import useImageInput from "src/components/useImageInput";
 
 function useForm() {
+  const { feedbackType, onFeedbackTypeChange } = useFeedbackTypeSelect();
   const maxFeedbackLength = 10000;
   const { feedback, onFeedbackChange } = useFeedbackInput({
     maxLength: maxFeedbackLength,
@@ -24,19 +26,25 @@ function useForm() {
     "empty" | "editing" | "submitting" | "submitted" | "error"
   >("empty");
 
-  useEffect(() => {
-    if (formState === "editing" || formState === "empty") {
-      if (feedback.trim() === "") setFormState("empty");
-      else setFormState("editing");
-    }
-  }, [feedback, formState]);
-
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const { text: email, onChange: onEmailChange } = useEmailInput(
     searchParams.get("email"),
   );
+
+  const isEmailRequired = feedbackType === "inquiry";
+  const isEmailValid = /^\S+@\S+\.\S+$/.test(email.trim());
+
+  useEffect(() => {
+    if (formState === "editing" || formState === "empty") {
+      const isIncomplete =
+        feedbackType === null ||
+        feedback.trim() === "" ||
+        (isEmailRequired && !isEmailValid);
+      setFormState(isIncomplete ? "empty" : "editing");
+    }
+  }, [feedbackType, feedback, isEmailRequired, isEmailValid, formState]);
 
   const onSubmit = async () => {
     setFormState("submitting");
@@ -65,6 +73,8 @@ function useForm() {
   };
 
   return {
+    feedbackType,
+    onFeedbackTypeChange,
     feedback,
     maxFeedbackLength,
     onFeedbackChange,
@@ -76,6 +86,7 @@ function useForm() {
     imagePreviews,
     email,
     onEmailChange,
+    isEmailRequired,
     onSubmit,
     formState,
   };

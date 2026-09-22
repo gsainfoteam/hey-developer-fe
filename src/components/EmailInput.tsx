@@ -28,22 +28,42 @@ const Input = styled.input`
 interface EmailInputProps {
   email: string;
   onEmailChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
 }
 
-const EmailInput = ({ email, onEmailChange }: EmailInputProps) => {
+const EmailInput = ({
+  email,
+  onEmailChange,
+  required = false,
+}: EmailInputProps) => {
   return (
     <Container>
-      <MultipleText>
-        <Text color="gray">(선택) </Text>
-        <Text>
-          필요한 경우, 이메일을 입력해 주시면 해당 문제에 관해서
-          안내드리겠습니다.
-        </Text>
-      </MultipleText>
+      {required ? (
+        <MultipleText>
+          <Text color="#eb6263">(필수) </Text>
+          <Text>
+            문의에 대한 답변을 드리기 위해 이메일이 필요합니다. 답변을 받으실
+            이메일을 입력해 주세요.
+          </Text>
+        </MultipleText>
+      ) : (
+        <MultipleText>
+          <Text color="gray">(선택) </Text>
+          <Text>
+            필요한 경우, 이메일을 입력해 주시면 해당 내용에 관해서
+            안내드리겠습니다.
+          </Text>
+        </MultipleText>
+      )}
       <Input
-        placeholder="이메일 주소 (선택 사항)"
+        type="email"
+        placeholder={
+          required ? "답변 받을 이메일 주소" : "이메일 주소 (선택 사항)"
+        }
         value={email}
         onChange={onEmailChange}
+        required={required}
+        aria-required={required}
       />
     </Container>
   );
