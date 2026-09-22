@@ -82,6 +82,7 @@ const Form = () => {
     email,
     onEmailChange,
     isEmailRequired,
+    isEmailInvalid,
     onSubmit,
     formState,
   } = useForm();
@@ -116,6 +117,7 @@ const Form = () => {
           email={email}
           onEmailChange={onEmailChange}
           required={isEmailRequired}
+          invalid={isEmailInvalid}
         />
         {formState === "submitting" && <Submitting>제출하는 중...</Submitting>}
         {(formState === "editing" || formState === "empty") && (
