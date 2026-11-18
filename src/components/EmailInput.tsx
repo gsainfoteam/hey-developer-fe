@@ -50,14 +50,14 @@ const EmailInput = ({
           <Text color="#eb6263">(필수) </Text>
           <Text>
             문의에 대한 답변을 드리기 위해 이메일이 필요합니다. 답변을 받으실
-            GIST 이메일을 입력해 주세요.
+            이메일을 입력해 주세요.
           </Text>
         </MultipleText>
       ) : (
         <MultipleText>
           <Text color="gray">(선택) </Text>
           <Text>
-            필요한 경우, GIST 이메일을 입력해 주시면 해당 내용에 관해서
+            필요한 경우, 이메일을 입력해 주시면 해당 내용에 관해서
             안내드리겠습니다.
           </Text>
         </MultipleText>
@@ -65,9 +65,7 @@ const EmailInput = ({
       <Input
         type="email"
         placeholder={
-          required
-            ? "답변 받을 GIST 이메일 주소 (예: id@gm.gist.ac.kr)"
-            : "GIST 이메일 주소 (선택 사항)"
+          required ? "답변 받을 이메일 주소" : "이메일 주소 (선택 사항)"
         }
         value={email}
         onChange={onEmailChange}
@@ -79,7 +77,7 @@ const EmailInput = ({
       {invalid && (
         <Hint>
           <Text fontSize="0.7em" color="#eb6263">
-            gist.ac.kr로 끝나는 이메일 주소만 입력할 수 있습니다.
+            올바른 이메일 주소를 입력해 주세요.
           </Text>
         </Hint>
       )}

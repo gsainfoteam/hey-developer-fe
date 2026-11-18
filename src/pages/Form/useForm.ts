@@ -37,7 +37,7 @@ function useForm() {
   } = useEmailInput(searchParams.get("email"));
 
   const isEmailRequired = feedbackType === "inquiry";
-  // 선택 입력이라도 값을 넣었다면 GIST 메일이어야 합니다.
+  // 선택 입력이라도 값을 넣었다면 올바른 이메일 형식이어야 합니다.
   const isEmailInvalid = !isEmailEmpty && !isEmailValid;
 
   useEffect(() => {
